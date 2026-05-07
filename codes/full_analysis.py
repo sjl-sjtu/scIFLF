@@ -403,13 +403,33 @@ def compute_biological_analysis(
             X_pert    = model.gene_decoder(Y_pert).squeeze(0)
             J_psi_x[:, j] = (X_pert - X_base) / eps_fd
 
-    J_np  = J_psi_x.cpu().numpy()                      # (G, d)
-    JtJ   = J_np.T @ J_np                               # (d, d)
-    try:
-        JtJ_inv = np.linalg.inv(JtJ + 1e-6 * np.eye(d_dim))
-    except np.linalg.LinAlgError:
-        JtJ_inv = np.linalg.pinv(JtJ)
+    J_np = J_psi_x.cpu().numpy()      # (G, d)
+    JtJ  = J_np.T @ J_np              # (d, d)
 
+    # Truncated spectral inverse of (J^T J) for stability, since J is typically low-rank (d << G).
+    eigvals, eigvecs = np.linalg.eigh(JtJ)
+
+    # descending
+    idx = np.argsort(eigvals)[::-1]
+    eigvals = eigvals[idx]
+    eigvecs = eigvecs[:, idx]
+
+    # relative truncation threshold
+    tau_rel = 1e-1
+    thresh = tau_rel * eigvals[0]
+
+    keep = eigvals > thresh
+
+    eigvals_keep = eigvals[keep]
+    eigvecs_keep = eigvecs[:, keep]
+
+    effective_rank = int(keep.sum())
+
+    JtJ_inv = (
+        eigvecs_keep
+        @ np.diag(1.0 / eigvals_keep)
+        @ eigvecs_keep.T
+    )
     # GRN = J * (-B) * (J^T J)^{-1} * J^T  ->  (G, G)
     GRN       = J_np @ (-B_np) @ JtJ_inv @ J_np.T
     grn_diag  = np.diag(GRN)
