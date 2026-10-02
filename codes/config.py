@@ -86,7 +86,7 @@ class Config:
     # ================================================================
     # Loss Weights
     # ================================================================
-    lambda_trajectory: float = 10.0
+    lambda_trajectory: float = 1.0
     # Main endpoint-matching signal in latent Z space.
 
     lambda_equilibrium: float = 0.3

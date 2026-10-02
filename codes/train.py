@@ -525,7 +525,7 @@ class Trainer:
 
     def load_checkpoint(self, filename: str):
         path = os.path.join(self.config.checkpoint_dir, filename)
-        ckpt = torch.load(path, map_location=self.device)
+        ckpt = torch.load(path, map_location=self.device, weights_only=False)
         self.model.load_state_dict(ckpt["model_state_dict"])
         self.optimizer.load_state_dict(ckpt["optimizer_state_dict"])
         if ckpt["scheduler_state_dict"] and self.scheduler:
