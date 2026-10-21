@@ -122,5 +122,6 @@ Interactive notebook to compute:
 [1] Jianle Sun, Kun Zhang. Identifiable Feedback-Controlled Latent Flow for Unpaired Single-cell Spatio-Temporal Dynamics. The Fortieth Annual Conference on Neural Information Processing Systems (NeurIPS), 2026.
 
 **Contact**
+
 Feel free to contact me via jianles@andrew.cmu.edu or sjl-2017@alumni.sjtu.edu.cn if you have any questions.
 
