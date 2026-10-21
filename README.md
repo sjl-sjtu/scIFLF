@@ -117,16 +117,6 @@ Interactive notebook to compute:
 
 ---
 
-## Evaluation Metrics
-
-All benchmark scripts calculate standardized metrics defined in `benchmark_utils.py`:
-
-| Metric | Target | Description |
-| :--- | :---: | :--- |
-| **`x_hvg_corr`** | $\uparrow$ Higher is better | Pearson correlation between predicted and true mean expression across Top-K HVGs. |
-| **`x_wasserstein`** | $\downarrow$ Lower is better | Median 1D Wasserstein distance across genes measuring distribution fidelity. |
-| **`spatial_domain_ari`** | $\uparrow$ Higher is better | Adjusted Rand Index comparing predicted Leiden spatial clusters with ground truth annotations. |
-| **`spatial_coherence_pc1`** | $\uparrow$ Higher is better | Moran's I of the 1st principal component across spatial coordinates to quantify pattern coherence. |
-
 **Reference**
+
 [1] Jianle Sun, Kun Zhang. Identifiable Feedback-Controlled Latent Flow for Unpaired Single-cell Spatio-Temporal Dynamics. The Fortieth Annual Conference on Neural Information Processing Systems (NeurIPS), 2026.
