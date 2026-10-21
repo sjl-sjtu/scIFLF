@@ -1,6 +1,6 @@
 # scIFLF: Latent Feedback-Control Neural ODE for Spatiotemporal Transcriptomics
 
-Implementation of **scIFLF**, a target-guided feedback-control dynamical model designed for reconstructing and predicting developmental trajectories in spatiotemporal transcriptomics (ST).
+Implementation of **scIFLF** (single-cell Identifiable Feedback-controlled Latent Flow) [1], a target-guided feedback-control dynamical model designed for reconstructing and predicting developmental trajectories in spatiotemporal transcriptomics (ST) time series.
 
 scIFLF maps high-dimensional gene expression and canonicalized spatial coordinates into a low-dimensional latent space ($\mathcal{Z}$), tracks continuous developmental progression via a feedback-driven Neural Ordinary Differential Equation (Neural ODE)
 $$\frac{dZ_i}{dt} = g(Z_i) + B(M_i - Z_i)$$
@@ -127,3 +127,6 @@ All benchmark scripts calculate standardized metrics defined in `benchmark_utils
 | **`x_wasserstein`** | $\downarrow$ Lower is better | Median 1D Wasserstein distance across genes measuring distribution fidelity. |
 | **`spatial_domain_ari`** | $\uparrow$ Higher is better | Adjusted Rand Index comparing predicted Leiden spatial clusters with ground truth annotations. |
 | **`spatial_coherence_pc1`** | $\uparrow$ Higher is better | Moran's I of the 1st principal component across spatial coordinates to quantify pattern coherence. |
+
+**Reference**
+[1] Jianle Sun, Kun Zhang. Identifiable Feedback-Controlled Latent Flow for Unpaired Single-cell Spatio-Temporal Dynamics. The Fortieth Annual Conference on Neural Information Processing Systems (NeurIPS), 2026.
